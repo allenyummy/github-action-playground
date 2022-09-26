@@ -1,0 +1,20 @@
+{
+  "name": "github-action-playground",
+  "version": "1.0.2",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "release": "echo Release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allenyummy/github-action-playground.git"
+  },
+  "author": "Yulun Chiang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/allenyummy/github-action-playground/issues"
+  },
+  "homepage": "https://github.com/allenyummy/github-action-playground#readme"
+}
