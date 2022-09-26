@@ -23,6 +23,7 @@ jobs:
         uses: qzb/standard-version-action@v1.0.5
 
       - name: Create Pull Request
+        id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
