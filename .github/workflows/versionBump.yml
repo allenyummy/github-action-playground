@@ -2,7 +2,7 @@ name: bump version
 
 on:
   schedule:
-    - cron: '47 * * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   version_bump:
