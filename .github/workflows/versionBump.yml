@@ -19,7 +19,8 @@ jobs:
         uses: qzb/standard-version-action@v1.0.5
       
       - name: Push tags
-        run: git push --follow-tags origin master
+        run: | 
+          git tag
 
       - name: Create Pull Request
         id: cpr
