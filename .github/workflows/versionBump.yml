@@ -18,56 +18,53 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
 
+      - run: |
+          echo "Hello World!"
+
       - name: Standard Version
         uses: qzb/standard-version-action@v1.0.5
 
-      - name: Create Pull Request
-        id: cpr
-        uses: peter-evans/create-pull-request@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "[create-pull-request] automated change [skip azurepipelines]"
+      # - name: Create Pull Request
+      #   id: cpr
+      #   uses: peter-evans/create-pull-request@v4
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     commit-message: "[create-pull-request] automated change [skip azurepipelines]"
 
-      - name: Check outputs
-        if: ${{ steps.cpr.outputs.pull-request-number }}
-        run: |
-          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
-          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
-          echo "Pull Request Operation - ${{ steps.cpr.outputs.pull-request-operation }}"
+      # - name: Check outputs
+      #   if: ${{ steps.cpr.outputs.pull-request-number }}
+      #   run: |
+      #     echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+      #     echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+      #     echo "Pull Request Operation - ${{ steps.cpr.outputs.pull-request-operation }}"
 
-      - name: Enable Automerge
-        uses: peter-evans/enable-pull-request-automerge@v2
-        with:
-          token: ${{ secrets.REVIEW_TOKEN }}
-          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
-          merge-method: squash
+      # - name: Enable Automerge
+      #   uses: peter-evans/enable-pull-request-automerge@v2
+      #   with:
+      #     token: ${{ secrets.REVIEW_TOKEN }}
+      #     pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+      #     merge-method: squash
 
-      - name: Auto approve
-        uses: juliangruber/approve-pull-request-action@v1
-        with:
-          github-token: ${{ secrets.REVIEW_TOKEN }}
-          number: ${{ steps.cpr.outputs.pull-request-number }}
+      # - name: Auto approve
+      #   uses: juliangruber/approve-pull-request-action@v1
+      #   with:
+      #     github-token: ${{ secrets.REVIEW_TOKEN }}
+      #     number: ${{ steps.cpr.outputs.pull-request-number }}
 
-      - run: |
-          tag=v$(npm -s run env echo '$npm_package_version')
-          echo $tag
-          # git tag $tag HEAD
-          # git push -u origin $tag
+      # - name: Push tags after merging pull request at master branch
+      #   run: |
+      #     git pull origin master
 
-        # - name: Push tags after merging pull request at master branch
-        #   run: |
-        #     git checkout master
+      #     tag=$(git tag)
+      #     tag_without_v=${tag:1}
+      #     pr_number=${{ steps.cpr.outputs.pull-request-number }}
 
-        #     tag=$(git tag)
-        #     tag_without_v=${tag:1}
-        #     pr_number=${{ steps.cpr.outputs.pull-request-number }}
+      #     search_string="chore(release): ${tag_without_v} (#${pr_number})"
+      #     echo Search commit message: $search_string
 
-        #     search_string="chore(release): ${tag_without_v} (#${pr_number})"
-        #     echo Search commit message: $search_string
+      #     commit_id=$(git log --grep="$search_string" --pretty=format:"%h")
+      #     echo Get commit id: $commit_id
 
-        #     commit_id=$(git log --grep="$search_string" --pretty=format:"%h")
-        #     echo Get commit id: $commit_id
-
-        #     git tag -d $tag
-        #     git tag $tag $commit_id
-        #     git push -u origin $tag
+      #     git tag -d $tag
+      #     git tag $tag $commit_id
+      #     git push -u origin $tag
