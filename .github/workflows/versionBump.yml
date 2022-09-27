@@ -18,23 +18,14 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
 
-      - name: Setup npmrc
-        uses: actions/setup-node@v2
-        with:
-          node-version: "16.13"
-          registry-url: "https://npm.pkg.github.com"
-          scope: "@asus-aics"
-
-      - run: |
-          npm install standard-version
-          npm run release
+      - name: Standard Version
+        uses: qzb/standard-version-action@v1.0.5
 
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "[create-pull-request] automated change [skip azurepipelines]"
 
       - name: Check outputs
         if: ${{ steps.cpr.outputs.pull-request-number }}
@@ -58,7 +49,8 @@ jobs:
 
       - name: Push tags after merging pull request at master branch
         run: |
-          git pull origin master
+
+          git log --oneline
 
           tag=$(git tag)
           tag_without_v=${tag:1}
