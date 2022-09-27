@@ -1,10 +1,8 @@
 name: bump version
 
 on:
-  # schedule:
-  #   - cron: '*/5 * * * *'
-  push:
-    branches: ["master"]
+  schedule:
+    - cron: "*/5 * * * *"
 
 jobs:
   version_bump:
@@ -62,15 +60,6 @@ jobs:
           commit_id=$(git log --grep="$search_string" --pretty=format:"%h")
           echo Get commit id: $commit_id
 
-          echo Before $(git tag)
-          echo
-
           git tag -d $tag
-          echo After $(git tag)
-          echo
-
           git tag $tag $commit_id
-          echo Tagging $(git tag)
-          echo
-
           git push -u origin $tag
