@@ -3,7 +3,7 @@ name: bump version
 on:
   # schedule:
   #   - cron: '*/5 * * * *'
-  pull_request:
+  push:
     branches: ["master"]
 
 jobs:
