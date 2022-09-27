@@ -63,8 +63,14 @@ jobs:
           echo Get commit id: $commit_id
 
           echo Before $(git tag)
+          echo
+
           git tag -d $tag
           echo After $(git tag)
+          echo
+
           git tag $tag $commit_id
           echo Tagging $(git tag)
+          echo
+
           git tag -u origin $tag
