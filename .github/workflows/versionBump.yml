@@ -47,21 +47,26 @@ jobs:
           github-token: ${{ secrets.REVIEW_TOKEN }}
           number: ${{ steps.cpr.outputs.pull-request-number }}
 
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: actions/checkout@v3
+
       - name: Push tags after merging pull request at master branch
         run: |
 
           git log --oneline
 
-          tag=$(git tag)
-          tag_without_v=${tag:1}
-          pr_number=${{ steps.cpr.outputs.pull-request-number }}
+          # tag=$(git tag)
+          # tag_without_v=${tag:1}
+          # pr_number=${{ steps.cpr.outputs.pull-request-number }}
 
-          search_string="chore(release): ${tag_without_v} (#${pr_number})"
-          echo Search commit message: $search_string
+          # search_string="chore(release): ${tag_without_v} (#${pr_number})"
+          # echo Search commit message: $search_string
 
-          commit_id=$(git log --grep="$search_string" --pretty=format:"%h")
-          echo Get commit id: $commit_id
+          # commit_id=$(git log --grep="$search_string" --pretty=format:"%h")
+          # echo Get commit id: $commit_id
 
-          git tag -d $tag
-          git tag $tag $commit_id
-          git push -u origin $tag
+          # git tag -d $tag
+          # git tag $tag $commit_id
+          # git push -u origin $tag
