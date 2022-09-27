@@ -1,8 +1,10 @@
 name: bump version
 
 on:
-  schedule:
-    - cron: '*/5 * * * *'
+  # schedule:
+  #   - cron: '*/5 * * * *'
+  pull_request:
+    branches: ["master"]
 
 jobs:
   version_bump:
@@ -44,7 +46,7 @@ jobs:
         with:
           github-token: ${{ secrets.REVIEW_TOKEN }}
           number: ${{ steps.cpr.outputs.pull-request-number }}
-      
+
       - name: Push tags after merging pull request
         run: |
           tag=$(git tag)
