@@ -59,4 +59,5 @@ jobs:
           commit_id=$(git log --grep="$search_string" --pretty=format:"%h")
           echo Get commit id: $commit_id
 
+          git tag -d $tag
           git tag $tag $commit_id
