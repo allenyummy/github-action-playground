@@ -62,6 +62,9 @@ jobs:
           commit_id=$(git log --grep="$search_string" --pretty=format:"%h")
           echo Get commit id: $commit_id
 
+          echo Before $(git tag)
           git tag -d $tag
+          echo After $(git tag)
           git tag $tag $commit_id
+          echo Tagging $(git tag)
           git tag -u origin $tag
