@@ -20,7 +20,8 @@ jobs:
       
       - name: Push tags
         run: | 
-          git tag
+          tag=$(git tag)
+          git push -u origin $tag
 
       - name: Create Pull Request
         id: cpr
