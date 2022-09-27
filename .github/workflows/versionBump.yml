@@ -73,4 +73,4 @@ jobs:
           echo Tagging $(git tag)
           echo
 
-          git tag -u origin $tag
+          git push -u origin $tag
