@@ -59,10 +59,8 @@ jobs:
           search_string="chore(release): ${tag_without_v} (#${pr_number})"
           echo Search commit message: $search_string
 
-          git log --oneline
-
           commit_id=$(git log --grep="$search_string" --pretty=format:"%h")
           echo Get commit id: $commit_id
 
-          # git tag -d $tag
-          # git tag $tag $commit_id
+          git tag -d $tag
+          git tag $tag $commit_id
