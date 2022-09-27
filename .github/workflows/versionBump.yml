@@ -53,21 +53,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Setup npmrc
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.13'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@asus-aics'
+
       - name: Push tags after merging pull request at master branch
         run: |
-
-          git log --oneline
-
-          # tag=$(git tag)
-          # tag_without_v=${tag:1}
-          # pr_number=${{ steps.cpr.outputs.pull-request-number }}
-
-          # search_string="chore(release): ${tag_without_v} (#${pr_number})"
-          # echo Search commit message: $search_string
-
-          # commit_id=$(git log --grep="$search_string" --pretty=format:"%h")
-          # echo Get commit id: $commit_id
-
-          # git tag -d $tag
-          # git tag $tag $commit_id
-          # git push -u origin $tag
+          tag=v$(npm -s run env echo '$npm_package_version')
+          echo $tag
+          git tag $tag HEAD
+          git push -u origin $tag
