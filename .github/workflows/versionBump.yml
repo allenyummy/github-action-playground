@@ -50,7 +50,7 @@ jobs:
   tag:
     runs-on: ubuntu-latest
     steps:
-      - name: actions/checkout@v3
+      - uses: actions/checkout@v3
 
       - name: Push tags after merging pull request at master branch
         run: |
