@@ -1,11 +1,14 @@
 name: bump version
 
 on:
-  schedule:
-    - cron: "*/5 * * * *"
+  # schedule:
+  #   - cron: "*/5 * * * *"
+  push: 
+    branches:
+      - master
 
 jobs:
-  version_bump:
+  bump_version:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -45,22 +48,26 @@ jobs:
           github-token: ${{ secrets.REVIEW_TOKEN }}
           number: ${{ steps.cpr.outputs.pull-request-number }}
 
-      - uses: actions/checkout@v3
+      - run: |
+          tag=v$(npm -s run env echo '$npm_package_version')
+          echo $tag
+          # git tag $tag HEAD
+          # git push -u origin $tag
 
-      - name: Push tags after merging pull request at master branch
-        run: |
-          git checkout master
+        # - name: Push tags after merging pull request at master branch
+        #   run: |
+        #     git checkout master
 
-          tag=$(git tag)
-          tag_without_v=${tag:1}
-          pr_number=${{ steps.cpr.outputs.pull-request-number }}
+        #     tag=$(git tag)
+        #     tag_without_v=${tag:1}
+        #     pr_number=${{ steps.cpr.outputs.pull-request-number }}
 
-          search_string="chore(release): ${tag_without_v} (#${pr_number})"
-          echo Search commit message: $search_string
+        #     search_string="chore(release): ${tag_without_v} (#${pr_number})"
+        #     echo Search commit message: $search_string
 
-          commit_id=$(git log --grep="$search_string" --pretty=format:"%h")
-          echo Get commit id: $commit_id
+        #     commit_id=$(git log --grep="$search_string" --pretty=format:"%h")
+        #     echo Get commit id: $commit_id
 
-          git tag -d $tag
-          git tag $tag $commit_id
-          git push -u origin $tag
+        #     git tag -d $tag
+        #     git tag $tag $commit_id
+        #     git push -u origin $tag
