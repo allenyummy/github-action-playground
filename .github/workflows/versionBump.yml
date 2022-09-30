@@ -1,8 +1,10 @@
 name: bump version
 
 on:
-  schedule:
-    - cron: "*/5 * * * *"
+  # schedule:
+  #   - cron: "*/5 * * * *"
+  push:
+    branches: ["release"]
 
 jobs:
   bump_version:
@@ -53,9 +55,9 @@ jobs:
       - name: Setup npmrc
         uses: actions/setup-node@v2
         with:
-          node-version: '16.13'
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@asus-aics'
+          node-version: "16.13"
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@asus-aics"
 
       - name: Push tags after merging pull request at master branch
         run: |
