@@ -1,0 +1,19 @@
+{
+    "LABEL": {
+        "name": "Incorrect PR Title",
+        "color": "EEEEEE"
+    },
+    "CHECKS": {
+        "regexp": "(XFT|XD|AISAAS|XHISV2)-[0-9]+, (XRT[0-9]+(H|W)[0-9]+(H|W)?[0-9]?[H]?), (feat|fix|refactor|docs|chore|perf|revert|test): .*\\S",
+        "regexpFlags": "i",
+        "ignoreLabels": [
+            "dont-check-PRs-with-this-label",
+            "meta"
+        ]
+    },
+    "MESSAGES": {
+        "success": "PR Title check OK",
+        "failure": "PR Title check Fail, check .github/pr-title-checker-config.json",
+        "notice": ""
+    }
+}
