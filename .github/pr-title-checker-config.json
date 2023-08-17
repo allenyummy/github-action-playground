@@ -1,14 +1,10 @@
 {
     "LABEL": {
-        "name": "title needs formatting",
+        "name": "Incorrect PR Title",
         "color": "EEEEEE"
     },
     "CHECKS": {
-        "prefixes": [
-            "fix: ",
-            "feat: "
-        ],
-        "regexp": "docs\\(v[0-9]\\): ",
+        "regexp": "(XFT|XD|AISAAS|XHISV2)-[0-9]+, (XRT[0-9]+(H|W)[0-9]+(H|W)?[0-9]?[H]?), (feat|fix|refactor|docs|chore|perf|revert|test): .*\\S",
         "regexpFlags": "i",
         "ignoreLabels": [
             "dont-check-PRs-with-this-label",
@@ -16,8 +12,8 @@
         ]
     },
     "MESSAGES": {
-        "success": "All OK",
-        "failure": "Failing CI test",
+        "success": "PR Title check OK",
+        "failure": "PR Title check Fail, check .github/pr-title-checker-config.json",
         "notice": ""
     }
 }
