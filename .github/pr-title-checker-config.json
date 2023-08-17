@@ -4,7 +4,7 @@
         "color": "EEEEEE"
     },
     "CHECKS": {
-        "regexp": "(XFT|XD|AISAAS|XHISV2)-[0-9]+, (XRT[0-9]+(H|W)[0-9]+(H|W)?[0-9]?[H]?), (feat|fix|refactor|docs|chore|perf|revert|test): .*\\S",
+        "regexp": "((XFT|XD|AISAAS|XHISV2)-[0-9]+, )?((XRT[0-9]+(H|W)[0-9]?(H|W)?), )?(feat|fix|refactor|docs|chore|perf|revert|test): .*\\S",
         "regexpFlags": "i",
         "ignoreLabels": [
             "dont-check-PRs-with-this-label",
