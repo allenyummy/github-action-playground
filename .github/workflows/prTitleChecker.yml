@@ -9,9 +9,7 @@ on:
       - unlabeled
     branches:
       - master
-      - releases/*
-      - hotfix/*
-      - production
+      - release
 
 jobs:
   check:
