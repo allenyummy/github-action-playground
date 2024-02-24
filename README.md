@@ -1,9 +1,3 @@
 # Github Action Playground
 
-### Test
-
-- 1
-- 2
-- 3
-- 4
-- 5
+This is a playground for testing github action.
